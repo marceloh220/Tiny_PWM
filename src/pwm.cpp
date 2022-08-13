@@ -6,7 +6,6 @@
  */ 
 
 #include "pwm.h"
-#include "e2prom.h"
 #include "power.h"
 #include "adc.h"
 #include "timer.h"
@@ -24,7 +23,6 @@ void pwm_init() {
 	pwm_out1(0);
 	TCCR0A = _bv(WGM01)|_bv(WGM00);
 	TCCR0B = PWM_PRESCALE;
-	//pwm_state = mode_restore();
 }
 
 void pwm_out0(uint8_t value) {

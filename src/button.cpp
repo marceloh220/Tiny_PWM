@@ -20,15 +20,15 @@ ISR(INT0_vect) {
 	pwm_mode(); /*change the pwm mode*/
 	
 	if (pwm_state == PWM_MODE_OUT0) {
-		/*if in pwm mode 0 its means that a power off return happens
-		  enable timer and wdt again */
+		/*if in pwm mode 1 its means that a power off return happens
+		  enable timer and WDT again */
 		timer_enable();
 		wdt_enable(WDTO_1S);
 	}
 	
 	else if(pwm_state == PWM_MODE_OFF) {
 		/*if pwm mode change to power off mode, disable all peripheral and power down*/
-		wdt_disable(); /*wdt must be disabled to enter in power down, otherwise the CPU will be reseted*/
+		wdt_disable(); /*WDT must be disabled to enter in power down, otherwise the CPU will be reseted*/
 		timer_disable();
 		adc_disable();
 		pwm_out0_disable();

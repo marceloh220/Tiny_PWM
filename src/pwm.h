@@ -21,7 +21,7 @@ typedef enum {
 	PWM_MODE_OFF,
 	PWM_MODE_OUT0,
 	PWM_MODE_OUT1,
-	PWM_MODE_BOTH,
+	PWM_MODE_BOTH
 } pwm_mode_t;
 
 extern uint8_t pwm_state;
