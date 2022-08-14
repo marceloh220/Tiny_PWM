@@ -21,7 +21,7 @@ uint8_t pwm_state = PWM_MODE_OUT0;
 void pwm_init() {
 	pwm_out0(0);
 	pwm_out1(0);
-	TCCR0A = _bv(WGM01)|_bv(WGM00);
+	TCCR0A = PWM_MODE;;
 	TCCR0B = PWM_PRESCALE;
 }
 
