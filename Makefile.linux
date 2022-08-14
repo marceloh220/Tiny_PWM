@@ -59,7 +59,7 @@ OBJCOPY = avr-objcopy
 OBJDUMP = avr-objdump
 SIZE = avr-size
 AVRDUDE = avrdude
-REMOVE = del
+REMOVE = rm -f
 
 
 #### Target Names
@@ -140,8 +140,8 @@ gdbinit: $(GDBINITFILE)
 	@echo "Use 'avr-gdb -x $(GDBINITFILE)'"
 
 clean:
-	$(REMOVE) $(TRG) $(TRG).map $(TRG).hex
+	$(REMOVE) $(TRG) $(TRG).map
 	$(REMOVE) $(OBJS)
 	$(REMOVE) $(GDBINITFILE)
-	$(REMOVE) "adc.cpp.d" "button.cpp.d" "e2prom.cpp.d" "main.cpp.d" "power.cpp.d" "pwm.cpp.d" "timer.cpp.d"
-	$(REMOVE) "Tiny_PWM.ee.hex" "Tiny_PWM.hex"
+	$(REMOVE) *.d
+	$(REMOVE) *.hex
