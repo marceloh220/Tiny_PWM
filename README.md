@@ -52,7 +52,7 @@ Install Make:
     
    - Windows:
       
-    Winget install GnuWin32.make
+    Make comes with avr-gcc
     
    - Debian/Ubuntu
    
