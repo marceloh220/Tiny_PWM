@@ -129,19 +129,9 @@ $(TRG): $(OBJS)
 %.ee.hex: %.elf
 	$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 $< $@
 
-# GDB Init file
-gdbinit: $(GDBINITFILE)
-	@echo "file $(TRG)" > $(GDBINITFILE)
-	@echo "target remote localhost:1212" >> $(GDBINITFILE)
-	@echo "load" >> $(GDBINITFILE)
-	@echo "break main" >> $(GDBINITFILE)
-	@echo "continue" >> $(GDBINITFILE)
-	@echo
-	@echo "Use 'avr-gdb -x $(GDBINITFILE)'"
-
 clean:
-	$(REMOVE) $(TRG) $(TRG).map $(TRG).hex
-	$(REMOVE) $(OBJS)
-	$(REMOVE) $(GDBINITFILE)
-	$(REMOVE) "adc.cpp.d" "button.cpp.d" "e2prom.cpp.d" "main.cpp.d" "power.cpp.d" "pwm.cpp.d" "timer.cpp.d"
-	$(REMOVE) "Tiny_PWM.ee.hex" "Tiny_PWM.hex"
+	$(REMOVE) *.o
+	$(REMOVE) *.d
+	$(REMOVE) *.map
+	$(REMOVE) *.elf
+	$(REMOVE) *.hex
