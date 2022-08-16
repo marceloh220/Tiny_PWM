@@ -50,32 +50,33 @@ Install avrdude:
     
 Install Make:
     
-   - Windows:
-      
+  - Windows:
+   
     Make comes with avr-gcc
     
-   - Debian/Ubuntu
+   - Debian/Ubuntu:
    
     sudo apt install make
    
-   - RedHat/Fedora
+   - RedHat/Fedora:
    
     sudo dnf install make
    
-   - Arch/Manjaro
+   - Arch/Manjaro:
    
     sudo pacman -S make
     
     
 Using:
-
-  For Windows rename Makefile.windows to Makefile\
-  For Linux rename Makefile.linux to Makefile
   
-   - Generate executable files
+   - Generate executable .elf files
      
          make all
          
+   - Generate .hex files
+   
+         make hex
+   
    - Clean build
         
          make clean
