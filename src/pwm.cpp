@@ -36,7 +36,7 @@
 	Bit 1 output 1
 */
 #define pwm_stateRead(_bit) (pwm_state&_bv(_bit))		
-uint8_t pwm_state = PWM_MODE_OUT0;
+uint8_t pwm_state = PWM_MODE_BOTH;
 
 void pwm_init() {
 	pwm_out0(0);
@@ -46,21 +46,40 @@ void pwm_init() {
 }
 
 void pwm_out0(uint8_t value) {
+	static uint8_t changeoff = 0;
+	static uint8_t old = 0;
+	int diff = value > old ? value - old : old - value;
 	if(!value || !pwm_stateRead(0)) {
 		pwm_out0_disable();
 		_off(_OUT0);
+		changeoff = 1;
 	} else {
-		pwm_out0_enable();
-		_OUT1_PWM = value;
+		if(changeoff) {
+			pwm_out0_enable();
+			changeoff = 0;
+		}
+		if(diff < PWM_OUT_THRESHOLD) return;
+		_OUT0_PWM = value;
 	}
+	old = value;
 }
 
 void pwm_out1(uint8_t value) {
+	static uint8_t changeoff = 0;
+	static uint8_t old = 0;
+	int diff = value > old ? value - old : old - value;
+	old = value;
 	if(!value || !pwm_stateRead(1)) {
 		pwm_out1_disable();
 		_off(_OUT1);
+		changeoff = 1;
 	} else {
-		pwm_out1_enable();
-		_OUT2_PWM = value;
+		if(changeoff) {
+			pwm_out1_enable();
+			changeoff = 0;
+		}
+		if(diff < PWM_OUT_THRESHOLD) return;
+		_OUT1_PWM = value;
 	}
+	old = value;
 }

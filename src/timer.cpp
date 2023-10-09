@@ -36,10 +36,12 @@ ISR(TIMER1_OVF_vect) {
 	if(timer_overflow == 7) {
 		/*each 16 x 7 = 113ms*/
 		timer_overflow = 0;
+#ifdef BUTTON_ENABLE
 		if (_read(_BT)) { 
 			/*if button release, enable interrupt INT0 to read again*/
 			int_enable();
 		}
+#endif
 	}
 	/*start the adc to read a new channel*/
 	adc_enable();

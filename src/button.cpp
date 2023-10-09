@@ -31,6 +31,7 @@
 #include "adc.h"
 #include "power.h"
 
+#ifdef BUTTON_ENABLE
 /*external interrupt INT0, configured to detect falling edge in button*/
 ISR(INT0_vect) {
 	
@@ -65,3 +66,4 @@ ISR(INT0_vect) {
 	}
 	
 }
+#endif

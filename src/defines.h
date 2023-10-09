@@ -66,10 +66,14 @@
 #define _OUT0 PB0
 #define _OUT1 PB1
 
-#define _OUT1_PWM OCR0A
-#define _OUT2_PWM OCR0B
+#define _OUT0_PWM OCR0A
+#define _OUT1_PWM OCR0B
 
 #define _BT	PB2
+
+//#define	BUTTON_ENABLE
+//#define	AUTO_TEST
+//#define DUAL_CHANNEL
 
 #define _ADC_CH0	2
 #define _ADC_CH1	3
@@ -79,6 +83,9 @@
 /*	Number of samples in moving average
 	More samples means steady and smooth captures, but slower the changes*/
 #define NUMBER_OF_SAMPLES		10
+
+// Threshold to PWM out accept variation
+#define PWM_OUT_THRESHOLD		5
 
 /****                    PWM configuration                    ****/
 

@@ -32,6 +32,7 @@
 #include "button.h"
 #include "timer.h"
 
+#ifdef AUTO_TEST
 void blink_out() {
 	_on(_OUT0);
 	_on(_OUT1);
@@ -40,6 +41,7 @@ void blink_out() {
 	_off(_OUT1);
 	_delay_ms(500);
 }
+#endif
 
 int main(void) {
 	
@@ -47,18 +49,18 @@ int main(void) {
 	_pullup(_BT);
 	_out(_OUT0);
 	_out(_OUT1);
-	
+#ifdef AUTO_TEST
 	/*test outputs in first power on*/
 	for(uint8_t i = 0; i < 3; i++) {
 		blink_out();
 	}
-	
+#endif
 	/*initialize peripherals*/
 	power_init();
 	pwm_init();
 	adc_init();
 	timer_init();
-	wdt_enable(WDTO_1S);
+	//wdt_enable(WDTO_1S);
 	system_init();
 	
     while (1) {
@@ -69,7 +71,9 @@ int main(void) {
 		/*pass setpoint to PWM output, shift left by 2 is the same as divide by 4
 		  ADC has 10 bits but PWM has only 8, divide by 4 convert this resolution*/
 		pwm_out0(adc_read(0)>>2);
+#ifdef DUAL_CHANNEL
 		pwm_out1(adc_read(1)>>2);
+#endif
 		
 		/*at final of sample processing cpu go to idle mode*/
 		power_idle();
